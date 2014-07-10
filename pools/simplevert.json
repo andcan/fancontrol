@@ -1,0 +1,12 @@
+{
+  "algo": "scrypt:2048",
+  "batchsize": "2048",
+  "hash-parallel": "2",
+  "interactive": "000000",
+  "launch-config": "T5x24",
+  "pass": "x",
+  "single-memory": "111111",
+  "texture-cache": "1",
+  "url": "stratum+tcp://uk.simplevert.com:3343",
+  "user": "Va6wf1EzSaM9DWse5hmrZZkMyycxFCdNkh.1",
+}
