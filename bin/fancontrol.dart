@@ -11,6 +11,7 @@ void main () {
       if (result.stdout is String) {
         regex.allMatches(result.stdout).forEach((match) {
           String id = match[1];
+          id = (int.parse(id) - 1).toString();
           int speed, temp = int.parse(match[2]), targettemp = conf[id];
           if (fans.containsKey(id)) {
             speed = fans[id];
@@ -25,14 +26,14 @@ void main () {
           }
           fans[id] = speed;
           Process.run('nvidia-settings', <String>['-a',
-                                                  '"[gpu:$id]/GPUFanControlState=1"',
+                                                  '[gpu:$id]/GPUFanControlState=1',
                                                   '-a',
                                                   '[fan:$id]/GPUCurrentFanSpeed=$speed'
                                                   ]).then((result) {
-            if (result.stdout is String) {
-              print ('[fan:$id] Temp $temp° Fan $speed%');
+            if (null == result.stderr) {
+              print ('[gpu:$id] Temp $temp° Fan $speed%');
             } else {
-              print ('${result.stderr}');
+              print (result.stderr);
             }
           });
         });
