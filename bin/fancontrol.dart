@@ -30,11 +30,7 @@ void main () {
                                                   '-a',
                                                   '[fan:$id]/GPUCurrentFanSpeed=$speed'
                                                   ]).then((result) {
-            if (null == result.stderr) {
-              print ('[gpu:$id] Temp $temp° Fan $speed%');
-            } else {
-              print (result.stderr);
-            }
+            print ('[gpu:$id] Temp $temp° Fan $speed% err: ${result.stderr}');
           });
         });
       }
