@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 void main () {
-  Map<String, int> conf = JSON.decoder.convert(new File('../conf.d/fancontrol.json').readAsStringSync());
+  Map<String, int> conf = JSON.decoder.convert(new File('conf.d/fancontrol.json').readAsStringSync());
   Map<String, int> fans = <String, int>{};
   RegExp regex = new RegExp(r'GPU \d\d\d\d:\d(\d):\d\d\.\d\s*Temperature\s*Gpu\s*: (\d\d) C', multiLine: true, caseSensitive: true);
   new Timer.periodic(new Duration(seconds: 2), (timer) {
@@ -21,8 +21,8 @@ void main () {
           speed += (temp - targettemp);
           if (speed > 100) {
             speed = 100;
-          } else if (speed < 0) {
-            speed = 0;
+          } else if (speed < 30) {
+            speed = 30;
           }
           fans[id] = speed;
           Process.run('nvidia-settings', <String>['-a',
