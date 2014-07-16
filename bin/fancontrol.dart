@@ -5,7 +5,7 @@ import 'dart:io';
 void main () {
   Map<String, int> conf = JSON.decoder.convert(new File('conf.d/fancontrol.json').readAsStringSync());
   Map<String, int> fans = <String, int>{};
-  RegExp regex = new RegExp(r'GPU \d\d\d\d:\d(\d):\d\d\.\d\s*Temperature\s*Gpu\s*: (\d\d) C', multiLine: true, caseSensitive: true);
+  RegExp regex = new RegExp(r'GPU\s*\d\d\d\d:(\d\d):\d\d\.\d\s*Temperature\s*GPU\s*Current\s*Temp\s*:\s*(\d\d)\s*C', multiLine: true, caseSensitive: true);
   new Timer.periodic(new Duration(seconds: 2), (timer) {
     Process.run('nvidia-smi', <String>['-q', '-d', 'TEMPERATURE']).then((result) {
       if (result.stdout is String) {
